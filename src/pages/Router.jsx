@@ -14,7 +14,7 @@ const AppRouter = (props) => {
   const history = useHistory();
   const isPollStarted = useSelector(state => state.isPollStarted);
 
-  console.log(isPollStarted)
+  // console.log(isPollStarted)
   return (
     <BrowserRouter >
       <Layout>
