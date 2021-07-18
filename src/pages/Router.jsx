@@ -8,6 +8,7 @@ import RadioButton from './RadioButton/RadioButton';
 import CheckBox from './CheckBox/CheckBox';
 import UserDetails from './UserDetails/UserDetails';
 import File from './File/File';
+import Result from './Result/Result';
 
 const AppRouter = (props) => {
 
@@ -26,6 +27,7 @@ const AppRouter = (props) => {
           <Route path='/check_box'  history component={CheckBox}/>
           <Route path='/user_details' history component={UserDetails}/>
           <Route path='/file' history component={File}/>
+          <Route path='/result' history component={Result}/>
         </Switch>
       </Layout>
     </BrowserRouter >

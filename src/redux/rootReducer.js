@@ -3,7 +3,8 @@
 import {
     startPoll,
     endPoll,
-    setRadioButtonAnswer
+    setRadioButtonAnswer,
+    deleteResultPoll
 } from "./actions";
 
 const mainState = {
@@ -19,16 +20,49 @@ const mainReducer = (state = mainState, action) => {
                 ...state,
                 isPollStarted: true
             }
+
         case endPoll:
             return {
                 ...state,
                 isPollStarted: false
             }
+
         case setRadioButtonAnswer:
             return {
                 ...state,
                 radioButtonAnswer: action.action
             }
+        case deleteResultPoll:
+            return mainState
+
+        // case setRadioButtonAnswer:
+        //     return {
+        //         ...state,
+        //         radioButtonAnswer: action.action
+        //     }
+
+        // case setRadioButtonAnswer:
+        //     return {
+        //         ...state,
+        //             radioButtonAnswer: action.action
+        //         }
+        // case setRadioButtonAnswer:
+        //     return {
+        //         ...state,
+        //         radioButtonAnswer: action.action
+        //     }
+
+        // case setRadioButtonAnswer:
+        //     return {
+        //         ...state,
+        //         radioButtonAnswer: action.action
+        //     }
+
+        // case setRadioButtonAnswer:
+        //     return {
+        //         ...state,
+        //         radioButtonAnswer: action.action
+        //     }
             
 
         default: return state;

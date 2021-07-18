@@ -8,7 +8,7 @@ const HomePage = (props) => {
   const dispatch = useDispatch();
   const isPollStarted = useSelector(state => state.isPollStarted);
 
-  // console.log(useSelector(state => state.radioButtonAnswer))
+  console.log(useSelector(state => state))
 
   const startPoll = () => {
     dispatch(startPoll_AC());

@@ -1,7 +1,7 @@
 export const startPoll = "START_POLL";
 export const endPoll = 'END_POOL';
 export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
-// export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
+export const deleteResultPoll = "DELETE_RESULT_POLL";
 // export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
 // export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
 // export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
@@ -29,11 +29,11 @@ export const setRadioButtonAnswer_AC = (data) => {
 };
 
 
-// export const endPoll_AC = (data) => {setRadioButtonAnswer
-//     return {
-//         type: endPoll
-//     };
-// };
+export const deleteResultPoll_AC = (data) => {
+    return {
+        type: deleteResultPoll
+    };
+};
 
 
 // export const endPoll_AC = (data) => {setRadioButtonAnswer
