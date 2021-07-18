@@ -3,8 +3,8 @@ export const endPoll = 'END_POOL';
 export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
 export const deleteResultPoll = "DELETE_RESULT_POLL";
 export const setCheckBoxAnswer = "DELETE_RESULT_POLL";
-// export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
-// export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
+export const setUserDetails = "SET_USER_DETAILS";
+export const setFile_s = "SET_FILE_S";
 // export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
 // export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
 // export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
@@ -25,23 +25,24 @@ export const endPoll_AC = () => {
 export const setRadioButtonAnswer_AC = (data) => {
     return {
         type: setRadioButtonAnswer,
-        action: data
+        payload: data
     };
 };
 
 export const setCheckBoxAnswer_AC = (data) => {
     return {
         type: setCheckBoxAnswer,
-        action: data
+        payload: data
     };
 };
 
 
-// export const endPoll_AC = (data) => {
-//     return {
-//         type: endPoll
-//     };
-// };
+export const setFile_s_AC = (data) => {
+    return {
+        type: setFile_s,
+        payload: data
+    };
+};
 
 
 // export const endPoll_AC = (data) => {

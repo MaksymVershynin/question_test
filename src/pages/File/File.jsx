@@ -1,7 +1,7 @@
 import React from 'react'
 import './File.css'
 import { Redirect } from "react-router-dom";
-import {setRadioButtonAnswer_AC, endPoll_AC} from "../../redux/actions"
+import {setFile_s_AC, endPoll_AC} from "../../redux/actions"
 import {useDispatch, useSelector} from "react-redux"
 
 import {
@@ -15,14 +15,28 @@ const File = (props) => {
   const [isRedirectResult, setRedirectResult] = React.useState(false);
   const [isRedirectBack, setRedirectBack] = React.useState(false);
 
+  const inputFile = React.useRef();
+  const [file223, setFile223] = React.useState();
+
+  const uploadDeathCertificate = (certificate) => {
+    const reader = new FileReader();
+    const file = certificate.target.files[0];
+    if(file) {
+      reader.readAsDataURL(file);
+      reader.addEventListener('load', () => {
+          const newFile = {
+            id: Date.now().toString(),
+            content: reader.result,
+            file: file
+          };
+          setFile223(newFile)
+      })
+    }
+}
+
   const result = () => {
-    // dispatch(
-    //   setRadioButtonAnswer_AC(
-    //     value === "other"
-    //       ? {isOther: true, value: other_answer}
-    //       : {isOther: false, value: value}
-    //   )
-    // )
+    dispatch(setFile_s_AC(file223))
+    // console.log(file223)
     setRedirectResult(true)
   }
 
@@ -31,13 +45,7 @@ const File = (props) => {
     //   console.log(state)
   }
   const back = () => {
-    // dispatch(
-    //   setRadioButtonAnswer_AC(
-    //     value === "other"
-    //       ? {isOther: true, value: other_answer}
-    //       : {isOther: false, value: value}
-    //   )
-    // )
+    dispatch(setFile_s_AC(file223))
     setRedirectBack(true)
   }
 
@@ -46,6 +54,12 @@ const File = (props) => {
     setRedirectHome(true)
   }
 
+  function t223 (data){
+    var MIME_TYPE = "text/csv";
+
+    var blob = new Blob([data], {type: MIME_TYPE});
+    window.location.href = window.URL.createObjectURL(blob);
+}
 
   return <>
     <div>File question section</div>
@@ -53,11 +67,15 @@ const File = (props) => {
     {isRedirectResult && <Redirect to ='/result' />}
     {isRedirectBack && <Redirect to ='/user_details' />}
 
+    <input 
+      ref={inputFile} 
+      type='file' 
+      onChange={uploadDeathCertificate}
+    />
 
     <Button onClick = {exit}>Exit</Button>
     <Button onClick = {back}>Back</Button>
     <Button onClick = {result}>Submit</Button>
-    
   </>
 };
 

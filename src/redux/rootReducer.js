@@ -5,7 +5,8 @@ import {
     endPoll,
     setRadioButtonAnswer,
     setCheckBoxAnswer,
-
+    setUserDetails,
+    setFile_s,
     deleteResultPoll
 } from "./actions";
 
@@ -13,8 +14,8 @@ const mainState = {
     isPollStarted: false,
     radioButtonAnswer: null,
     checkBoxAnswer: null,
-    // userDetails: null,
-    // file: null,
+    userDetails: null,
+    file_s: null,
 }
 
 const mainReducer = (state = mainState, action) => {
@@ -34,25 +35,26 @@ const mainReducer = (state = mainState, action) => {
         case setRadioButtonAnswer:
             return {
                 ...state,
-                radioButtonAnswer: action.action
+                radioButtonAnswer: action.payload
             }
 
         case setCheckBoxAnswer:
             return {
                 ...state,
-                checkBoxAnswer: action.action
+                checkBoxAnswer: action.payload
             }
 
-        // case setRadioButtonAnswer:
-        //     return {
-        //         ...state,
-        //             radioButtonAnswer: action.action
-        //         }
-        // case setRadioButtonAnswer:
-        //     return {
-        //         ...state,
-        //         radioButtonAnswer: action.action
-        //     }
+        case setUserDetails:
+            return {
+                ...state,
+                userDetails: action.payload
+            }
+
+        case setFile_s:
+            return {
+                ...state,
+                file_s: action.payload
+            }
 
         // case setRadioButtonAnswer:
         //     return {

@@ -57,7 +57,6 @@ const CheckBox = (props) => {
     {isRedirectNext && <Redirect to ='/user_details' />}
     {isRedirectBack && <Redirect to ='/radio_button' />}
 
-{console.log(answer)}
     <div>CheckBox question section</div>
     <FormGroup row>
       <FormControlLabel
