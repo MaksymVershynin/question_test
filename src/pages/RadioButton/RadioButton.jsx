@@ -3,7 +3,7 @@ import './RadioButton.css'
 import {useDispatch, useSelector} from "react-redux"
 import {setRadioButtonAnswer_AC, endPoll_AC} from "../../redux/actions"
 
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import { 
   Radio,
@@ -21,31 +21,36 @@ const RadioButton = (props) => {
   const dispatch = useDispatch();
   const answer = useSelector(state => state.radioButtonAnswer)
 
-  const [isRedirect, setRedirect] = React.useState(false);
+  const [isRedirectHome, setRedirectHome] = React.useState(false);
+  const [isRedirectNext, setRedirectNext] = React.useState(false);
+  const [value, setValue] = React.useState(answer?.isOther ? "other" : answer?.value);
+  const [other_answer, setOtherAnswer] = React.useState(answer?.isOther && answer?.value);
 
-  console.log(answer)
-
-  const [value, setValue] = React.useState(answer?.isOther ? "other" : answer.value);
-  const [other_answer, setLocalAnswer] = React.useState(answer?.isOther ? answer.value : "other");
-
-  console.log(value)
-
-const handleChange = (event) => {
-  setValue(event.target.value)
-}
+  const next = () => {
+    dispatch(
+      setRadioButtonAnswer_AC(
+        value === "other"
+          ? {isOther: true, value: other_answer}
+          : {isOther: false, value: value}
+      )
+    )
+    setRedirectNext(true)
+  }
 
   const exit = () => {
     dispatch(endPoll_AC());
-    setRedirect(true)
+    setRedirectHome(true)
   }
 
   return <>
-    {isRedirect && <Redirect to ='/' />}
+    {isRedirectHome && <Redirect to ='/' />}
+    {isRedirectNext && <Redirect to ='/check_box' />}
+
     <div>RadioButton question section</div>
     <form onSubmit={exit}>
     <FormControl component="fieldset">
       <FormLabel component="legend">Which number do you like more?</FormLabel>
-      <RadioGroup aria-label="gender" name="gender1" value={value} onChange = {handleChange}>
+      <RadioGroup aria-label="gender" name="gender1" value={value} onChange = {e => setValue(e.target.value)}>
         <FormControlLabel value="1" control={<Radio />} label="number 1" />
         <FormControlLabel value="2" control={<Radio />} label="number 2" />
         {value === "other" ?
@@ -54,7 +59,7 @@ const handleChange = (event) => {
             type="number"
             id='other-for-radio_button'
             label = 'your number'
-            onChange = {event => setLocalAnswer(event.target.value)}
+            onChange = {event => setOtherAnswer(event.target.value)}
             required
           />
           :
@@ -67,8 +72,8 @@ const handleChange = (event) => {
     
     <div>Please, confirm your new answer by clicking on the button "Next" </div>
     <div>Your new answer --&gt; {value === "other" ? other_answer : value}</div>
-    <div>Your current answer --&gt; {answer.value}</div>
-    <Button onClick = {() => dispatch(setRadioButtonAnswer_AC(value === "other" ? {isOther: true, value: other_answer} : {isOther: false, value: value}))}>Next</Button>
+    <div>Your current answer --&gt; {answer?.value}</div>
+    <Button onClick = {next}>Next</Button>
 
   </>
 };
