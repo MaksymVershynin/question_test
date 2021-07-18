@@ -4,13 +4,17 @@ import {
     startPoll,
     endPoll,
     setRadioButtonAnswer,
+    setCheckBoxAnswer,
+
     deleteResultPoll
 } from "./actions";
 
 const mainState = {
     isPollStarted: false,
     radioButtonAnswer: null,
-
+    checkBoxAnswer: null,
+    // userDetails: null,
+    // file: null,
 }
 
 const mainReducer = (state = mainState, action) => {
@@ -32,14 +36,12 @@ const mainReducer = (state = mainState, action) => {
                 ...state,
                 radioButtonAnswer: action.action
             }
-        case deleteResultPoll:
-            return mainState
 
-        // case setRadioButtonAnswer:
-        //     return {
-        //         ...state,
-        //         radioButtonAnswer: action.action
-        //     }
+        case setCheckBoxAnswer:
+            return {
+                ...state,
+                checkBoxAnswer: action.action
+            }
 
         // case setRadioButtonAnswer:
         //     return {
@@ -64,6 +66,8 @@ const mainReducer = (state = mainState, action) => {
         //         radioButtonAnswer: action.action
         //     }
             
+        case deleteResultPoll:
+            return mainState
 
         default: return state;
     }

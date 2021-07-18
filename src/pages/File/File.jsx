@@ -26,6 +26,10 @@ const File = (props) => {
     setRedirectResult(true)
   }
 
+  function test() {
+    // dispatch( setCheckBoxAnswer_AC(state) );
+    //   console.log(state)
+  }
   const back = () => {
     // dispatch(
     //   setRadioButtonAnswer_AC(
@@ -52,7 +56,7 @@ const File = (props) => {
 
     <Button onClick = {exit}>Exit</Button>
     <Button onClick = {back}>Back</Button>
-    <Button onClick = {result}>Finish</Button>
+    <Button onClick = {result}>Submit</Button>
     
   </>
 };

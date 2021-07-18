@@ -48,26 +48,26 @@ const RadioButton = (props) => {
 
     <div>RadioButton question section</div>
     <form onSubmit={exit}>
-    <FormControl component="fieldset">
-      <FormLabel component="legend">Which number do you like more?</FormLabel>
-      <RadioGroup aria-label="gender" name="gender1" value={value} onChange = {e => setValue(e.target.value)}>
-        <FormControlLabel value="1" control={<Radio />} label="number 1" />
-        <FormControlLabel value="2" control={<Radio />} label="number 2" />
-        {value === "other" ?
-          <TextField 
-            value = {other_answer}
-            type="number"
-            id='other-for-radio_button'
-            label = 'your number'
-            onChange = {event => setOtherAnswer(event.target.value)}
-            required
-          />
-          :
-          <FormControlLabel value = "other" control={<Radio />} label="Other" />
-        }
-      </RadioGroup>
-    </FormControl>
-    <Button  type ="submit">Exit</Button>
+      <FormControl component="fieldset">
+        <FormLabel component="legend">Which number do you like more?</FormLabel>
+        <RadioGroup aria-label="gender" name="gender1" value={value} onChange = {e => setValue(e.target.value)}>
+          <FormControlLabel value="1" control={<Radio />} label="number 1" />
+          <FormControlLabel value="2" control={<Radio />} label="number 2" />
+          {value === "other" ?
+            <TextField 
+              value = {other_answer}
+              type="number"
+              id='other-for-radio_button'
+              label = 'your number'
+              onChange = {event => setOtherAnswer(event.target.value)}
+              required
+            />
+            :
+            <FormControlLabel value = "other" control={<Radio />} label="Other" />
+          }
+        </RadioGroup>
+      </FormControl>
+      <Button  type ="submit">Exit</Button>
     </form>
     
     <div>Please, confirm your new answer by clicking on the button "Next" </div>

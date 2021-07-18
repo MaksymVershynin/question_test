@@ -25,6 +25,7 @@ const UserDetails = (props) => {
     <div>Result section</div>
     {isRedirectHome && <Redirect to ='/' />}
 
+{console.log(useSelector(state => state))}
 
     <Button onClick = {exit}>Home Page</Button>
 
