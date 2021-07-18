@@ -1,91 +1,38 @@
 // import { combineReducers } from 'redux';
 
 import {
-    // setUserSignIn,
-    // setUserConfirmed,
-    setListOfCountries,
-    // setUserNotificationRead,
-    // setUserNotificationRequestStatus,
+    startPoll,
+    endPoll,
+    setRadioButtonAnswer
 } from "./actions";
-const countriesState = {
-    countries: []
+
+const mainState = {
+    isPollStarted: false,
+    radioButtonAnswer: null,
+
 }
 
-const countriesReducer = (state = countriesState, action) => {
+const mainReducer = (state = mainState, action) => {
     switch (action.type) {
-        case setListOfCountries:
+        case startPoll:
             return {
                 ...state,
-                countries: action.countries
+                isPollStarted: true
             }
+        case endPoll:
+            return {
+                ...state,
+                isPollStarted: false
+            }
+        case setRadioButtonAnswer:
+            return {
+                ...state,
+                radioButtonAnswer: action.action
+            }
+            
+
         default: return state;
     }
 }
 
-export default countriesReducer
-/////////////////////////////////////////////////////////////////////////////////////////
-// const userState = {
-//     user: {},
-//     relations: [],
-//     notifications: [],
-//     //avatar: '',
-// }
-
-// const userReducer = (state = userState, action) => {
-//     switch(action.type) {
-//         case setUserNotificationRead:
-//             return {
-//                 ...state,
-//                 notifications: state.notifications
-//                     .map(notif => notif.id === action.payload 
-//                         ? {...notif, read: true } 
-//                         : notif)
-//             }
-//         case setUserNotificationRequestStatus:
-//             return {
-//                 ...state,
-//                 notifications: state.notifications
-//                 .map(notif => notif.id === action.payload.notificationId
-//                     ? {...notif, show_button: false, requestStatus: action.payload.requestStatus } 
-//                     : notif)
-//             }
-//         default: return state;
-//     }
-// }
-
-// /////////////////////////////////////////////////////////////////////////////////////////
-// const signInState = {
-//     isAuthorized: Boolean(localStorage.getItem('auth')) || false,
-//     currentScreen: 'signIn',
-//     onboardingDone: Boolean(localStorage.getItem('onboarding')) || false,
-//     userId: '',
-//     countries: []
-// }
-
-// const signInReducer = (state = signInState, action) => {
-//     switch (action.type) {
-//         case setUserSignIn:
-//             return {
-//                 ...state,
-//                 user: action.user,
-//             }
-
-//         case setUserConfirmed:
-//             return {
-//                 ...state,
-//                 isAuthorized: true,
-//             }
-//         default: return state;
-//     }
-// };
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const rootReducer = combineReducers({
-//     user: userReducer,
-
-//     auth: signInReducer,
-
-//     countries: countriesReducer,
-
-// });
-
-// export default rootReducer;
+export default mainReducer

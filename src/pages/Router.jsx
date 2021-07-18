@@ -1,6 +1,6 @@
 import React from 'react'
-import { BrowserRouter , Switch, Route, Redirect } from "react-router-dom";
-
+import { BrowserRouter , Switch, Route, useHistory, Redirect, Link } from "react-router-dom";
+import { useSelector} from "react-redux"
 import Layout from '../containers/Layout';
 
 import HomePage from './HomePage';
@@ -10,20 +10,24 @@ import UserDetails from './UserDetails/UserDetails';
 import File from './File/File';
 
 const AppRouter = (props) => {
+
+  const history = useHistory();
+  const isPollStarted = useSelector(state => state.isPollStarted);
+
+  console.log(isPollStarted)
   return (
     <BrowserRouter >
-      {/* <Layout history={history} location={props.location}> */}
+      <Layout>
         <Switch>
           {/* <Redirect from='/' exact to={'/home'} /> */}
-          <Route exact path="/"  component={HomePage}/>
-          <Route path='/radio_button' component={RadioButton}/>
-          <Route path='/check_box'  component={CheckBox}/>
-          <Route path='/user_details' component={UserDetails}/>
-          <Route path='/file' component={File}/>
-          {/* <Route path='/find_grave' location={props.location} component={FindGraveRouter}/> */}
-          {/* <Route path='/learn_more' location={props.location} component={LearnMore}/> */}
+          {/* {!isPollStarted && <Redirect to={'/'} />} */}
+          <Route exact path="/" history component={HomePage}/>
+          <Route path='/radio_button' history component={RadioButton}/>
+          <Route path='/check_box'  history component={CheckBox}/>
+          <Route path='/user_details' history component={UserDetails}/>
+          <Route path='/file' history component={File}/>
         </Switch>
-      {/* </Layout> */}
+      </Layout>
     </BrowserRouter >
   )
 };
