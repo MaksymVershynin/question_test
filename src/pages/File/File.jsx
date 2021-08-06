@@ -40,10 +40,6 @@ const File = (props) => {
     setRedirectResult(true)
   }
 
-  function test() {
-    // dispatch( setCheckBoxAnswer_AC(state) );
-    //   console.log(state)
-  }
   const back = () => {
     dispatch(setFile_s_AC(file223))
     setRedirectBack(true)
@@ -53,13 +49,6 @@ const File = (props) => {
     dispatch(endPoll_AC());
     setRedirectHome(true)
   }
-
-  function t223 (data){
-    var MIME_TYPE = "text/csv";
-
-    var blob = new Blob([data], {type: MIME_TYPE});
-    window.location.href = window.URL.createObjectURL(blob);
-}
 
   return <>
     <div>File question section</div>
@@ -72,6 +61,8 @@ const File = (props) => {
       type='file' 
       onChange={uploadDeathCertificate}
     />
+
+
 
     <Button onClick = {exit}>Exit</Button>
     <Button onClick = {back}>Back</Button>

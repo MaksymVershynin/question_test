@@ -1,5 +1,7 @@
 import React from 'react'
 import './CheckBox.css'
+import { useGlobalStyle } from "../globalStyles";
+
 
 import { Redirect } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -15,6 +17,8 @@ import {
 
 const CheckBox = (props) => {  
   const dispatch = useDispatch(); 
+  const globalClasses = useGlobalStyle();
+
   const answer = useSelector(state => state.checkBoxAnswer)
 
   const [isRedirectHome, setRedirectHome] = React.useState(false);
@@ -32,8 +36,8 @@ const CheckBox = (props) => {
   const handleChange = (event) => {
     const {name, checked, value } = event.target
     name === "inputColot"
-    ? setState({ ...state, [name]: value })
-    : setState({ ...state, [name]: checked });
+      ? setState({ ...state, [name]: value })
+      : setState({ ...state, [name]: checked });
   };
 
   const next = () => {
@@ -51,68 +55,71 @@ const CheckBox = (props) => {
     setRedirectHome(true)
   }
 
-
   return <>
     {isRedirectHome && <Redirect to ='/' />}
     {isRedirectNext && <Redirect to ='/user_details' />}
     {isRedirectBack && <Redirect to ='/radio_button' />}
 
-    <div>CheckBox question section</div>
-    <FormGroup row>
-      <FormControlLabel
-        control={
-        <Checkbox 
-          checked={state.green}
-          onChange={handleChange}
-          name="green" 
+    <div className={globalClasses.root}>
+      <div>CheckBox question section</div>
+      <FormGroup row>
+        <FormControlLabel
+          control={
+          <Checkbox 
+            checked={state.green}
+            onChange={handleChange}
+            name="green" 
+          />
+        }
+          label="Green"
         />
-      }
-        label="Green"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.blue}
-            onChange={handleChange}
-            name="blue"
-          />
-        }
-        label="blue"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.red}
-            onChange={handleChange}
-            name="red"
-          />
-        }
-        label="red"
-      />
-       <FormControlLabel
-        control={<>
-          <Checkbox
-            checked={state.checkedOther}
-            onChange={handleChange}
-            name="checkedOther"
-          />
-          {
-            state.checkedOther && <TextField 
-                name="inputColot"
-                value={state.inputColot}
-                onChange={handleChange}
-                placeholder='input your optione here ...'
-              />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={state.blue}
+              onChange={handleChange}
+              name="blue"
+            />
           }
-          </>
-        }
-        label={state.checkedOther ? null : "other"}
-      />
-    </FormGroup>
+          label="blue"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={state.red}
+              onChange={handleChange}
+              name="red"
+            />
+          }
+          label="red"
+        />
+        <FormControlLabel
+          control={<>
+            <Checkbox
+              checked={state.checkedOther}
+              onChange={handleChange}
+              name="checkedOther"
+            />
+            {
+              state.checkedOther && <TextField 
+                  name="inputColot"
+                  value={state.inputColot}
+                  onChange={handleChange}
+                  placeholder='input your optione here ...'
+                />
+            }
+            </>
+          }
+          label={state.checkedOther ? null : "other"}
+        />
+      </FormGroup>
 
-    <Button onClick = {exit}>Exit</Button>
-    <Button onClick = {back}>Back</Button>
-    <Button onClick = {next}>Next</Button>
+      <div className = {globalClasses.navigationButtons}>
+        <Button onClick = {exit}>Exit</Button>
+        <Button onClick = {back}>Back</Button>
+        <Button onClick = {next}>Next</Button>
+      </div>
+    </div>
   </>;
 }
 export default CheckBox;

@@ -12,16 +12,10 @@ import Result from './Result/Result';
 
 const AppRouter = (props) => {
 
-  const history = useHistory();
-  const isPollStarted = useSelector(state => state.isPollStarted);
-
-  // console.log(isPollStarted)
   return (
     <BrowserRouter >
       <Layout>
         <Switch>
-          {/* <Redirect from='/' exact to={'/home'} /> */}
-          {/* {!isPollStarted && <Redirect to={'/'} />} */}
           <Route exact path="/" history component={HomePage}/>
           <Route path='/radio_button' history component={RadioButton}/>
           <Route path='/check_box'  history component={CheckBox}/>

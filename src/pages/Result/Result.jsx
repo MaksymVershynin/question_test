@@ -1,7 +1,7 @@
 import React from 'react'
 import './Result'
 import {useDispatch, useSelector} from "react-redux"
-import { deleteResultPoll_AC } from "../../redux/actions"
+import { deleteResultPoll_AC, endPoll_AC } from "../../redux/actions"
 
 import { Redirect } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const UserDetails = (props) => {
 
 
   const exit = () => {
+    dispatch(endPoll_AC());
     dispatch(deleteResultPoll_AC());
     setRedirectHome(true)
   }

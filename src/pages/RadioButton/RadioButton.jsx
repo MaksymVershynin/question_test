@@ -1,7 +1,10 @@
-import React from 'react'
-import './RadioButton.css'
-import {useDispatch, useSelector} from "react-redux"
-import {setRadioButtonAnswer_AC, endPoll_AC} from "../../redux/actions"
+import React from 'react';
+import './styles.js';
+
+import { useGlobalStyle } from "../globalStyles";
+
+import {useDispatch, useSelector} from "react-redux";
+import {setRadioButtonAnswer_AC, endPoll_AC} from "../../redux/actions";
 
 import { Redirect } from "react-router-dom";
 
@@ -17,8 +20,9 @@ import {
 
 
 const RadioButton = (props) => {
-
   const dispatch = useDispatch();
+  const globalClasses = useGlobalStyle();
+
   const answer = useSelector(state => state.radioButtonAnswer)
 
   const [isRedirectHome, setRedirectHome] = React.useState(false);
@@ -42,17 +46,18 @@ const RadioButton = (props) => {
     setRedirectHome(true)
   }
 
-  return <>
+  return <div className = {globalClasses.root}>
     {isRedirectHome && <Redirect to ='/' />}
     {isRedirectNext && <Redirect to ='/check_box' />}
-
-    <div>RadioButton question section</div>
-    <form onSubmit={exit}>
+    
+    <div className = {globalClasses.header}>RadioButton question section</div>
       <FormControl component="fieldset">
         <FormLabel component="legend">Which number do you like more?</FormLabel>
-        <RadioGroup aria-label="gender" name="gender1" value={value} onChange = {e => setValue(e.target.value)}>
+        <RadioGroup aria-label="numbers" name="number_name" value={value} onChange = {e => setValue(e.target.value)}>
           <FormControlLabel value="1" control={<Radio />} label="number 1" />
           <FormControlLabel value="2" control={<Radio />} label="number 2" />
+          <FormControlLabel value="3" control={<Radio />} label="number 3" />
+          <FormControlLabel value="4" control={<Radio />} label="number 4" />
           {value === "other" ?
             <TextField 
               value = {other_answer}
@@ -60,22 +65,23 @@ const RadioButton = (props) => {
               id='other-for-radio_button'
               label = 'your number'
               onChange = {event => setOtherAnswer(event.target.value)}
-              required
             />
             :
             <FormControlLabel value = "other" control={<Radio />} label="Other" />
           }
         </RadioGroup>
       </FormControl>
-      <Button  type ="submit">Exit</Button>
-    </form>
     
     <div>Please, confirm your new answer by clicking on the button "Next" </div>
     <div>Your new answer --&gt; {value === "other" ? other_answer : value}</div>
     <div>Your current answer --&gt; {answer?.value}</div>
-    <Button onClick = {next}>Next</Button>
 
-  </>
+    <div className = {globalClasses.navigationButtons}>
+      <Button onClick = {exit}>Exit</Button>
+      <Button className = {globalClasses.nextButton} variant = "contained" onClick = {next}>Next</Button>
+    </div>
+
+    </div>
 };
 
 export default RadioButton;
