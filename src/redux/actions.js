@@ -5,7 +5,7 @@ export const deleteResultPoll = "DELETE_RESULT_POLL";
 export const setCheckBoxAnswer = "DELETE_RESULT_POLL";
 export const setUserDetails = "SET_USER_DETAILS";
 export const setFile_s = "SET_FILE_S";
-// export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
+export const setUserOption = "SET_USER_OPTION";
 // export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
 // export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
 // export const setRadioButtonAnswer = "SET_RADIO_ANSWER";
@@ -44,12 +44,19 @@ export const setFile_s_AC = (data) => {
     };
 };
 
+export const setUserOption_AC = (data) => {
+    return {
+        type: setUserOption,
+        payload: data
+    };
+};
 
-// export const endPoll_AC = (data) => {
-//     return {
-//         type: endPoll
-//     };
-// };
+export const setUserDetails_AC = (data) => {
+    return {
+        type: setUserDetails,
+        payload: data
+    };
+};
 
 export const deleteResultPoll_AC = () => {
     return {

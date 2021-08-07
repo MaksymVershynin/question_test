@@ -1,10 +1,9 @@
-// import { combineReducers } from 'redux';
-
 import {
     startPoll,
     endPoll,
     setRadioButtonAnswer,
     setCheckBoxAnswer,
+    setUserOption,
     setUserDetails,
     setFile_s,
     deleteResultPoll
@@ -12,9 +11,16 @@ import {
 
 const mainState = {
     isPollStarted: false,
-    radioButtonAnswer: null,
-    checkBoxAnswer: null,
-    userDetails: null,
+    radioButtonAnswer: '',
+    checkBoxAnswer: '',
+    userDetails: {
+        option: null,
+        name: '',
+        surname: '',
+        email:'',
+        phone:'',
+        address:''
+    },
     file_s: null,
 }
 
@@ -28,7 +34,7 @@ const mainReducer = (state = mainState, action) => {
 
         case endPoll:
             return {
-                ...state,
+                ...mainState,
                 isPollStarted: false
             }
 
@@ -44,10 +50,16 @@ const mainReducer = (state = mainState, action) => {
                 checkBoxAnswer: action.payload
             }
 
+        case setUserOption:
+            return {
+                ...state,
+                userDetails: {...state.userDetails, option: action.payload}
+            }
+
         case setUserDetails:
             return {
                 ...state,
-                userDetails: action.payload
+                userDetails: {...state.userDetails, ...action.payload}
             }
 
         case setFile_s:
@@ -55,12 +67,6 @@ const mainReducer = (state = mainState, action) => {
                 ...state,
                 file_s: action.payload
             }
-
-        // case setRadioButtonAnswer:
-        //     return {
-        //         ...state,
-        //         radioButtonAnswer: action.action
-        //     }
 
         // case setRadioButtonAnswer:
         //     return {

@@ -1,11 +1,13 @@
-import React from 'react'
-import { useGlobalStyle } from "./globalStyles"
-import {useDispatch, useSelector} from "react-redux"
-import {startPoll_AC} from "../redux/actions"
-
+import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import { Redirect, Link } from "react-router-dom";
 import { makeStyles, Button } from '@material-ui/core';
 
-import { Redirect, Link } from "react-router-dom";
+import { useGlobalStyle } from "./globalStyles";
+import {startPoll_AC} from "../redux/actions";
+
+
+
 
 
 const useLocalStyle = makeStyles(() => ({
@@ -29,8 +31,6 @@ const HomePage = (props) => {
   const globalClasses = useGlobalStyle();
   const isPollStarted = useSelector(state => state.isPollStarted);
 
-  console.log(useSelector(state => state))
-
   const startPoll = () => {
     dispatch(startPoll_AC());
     return <Link to="/radio_button" />
@@ -38,7 +38,7 @@ const HomePage = (props) => {
 
   return <div className={globalClasses.root} >
     {isPollStarted && <Redirect to ='/radio_button' />}
-    <div className={globalClasses.header}>Home page</div>
+    <header>Home page</header>
     <div className={classes.title}>Welcome to our Poll</div>
 
     <ul className={classes.list}>

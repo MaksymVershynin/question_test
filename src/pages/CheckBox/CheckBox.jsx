@@ -1,12 +1,10 @@
 import React from 'react'
-import './CheckBox.css'
-import { useGlobalStyle } from "../globalStyles";
-
-
 import { Redirect } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import { setCheckBoxAnswer_AC, endPoll_AC } from "../../redux/actions"
 
+import { useGlobalStyle } from "../globalStyles";
+
+import { setCheckBoxAnswer_AC, endPoll_AC } from "../../redux/actions"
 import {
   FormGroup,
   Checkbox,
@@ -30,12 +28,12 @@ const CheckBox = (props) => {
     blue: false,
     red: false,
     checkedOther: false,
-    inputColot: ''
+    inputColor: ''
   });
 
   const handleChange = (event) => {
     const {name, checked, value } = event.target
-    name === "inputColot"
+    name === "inputColor"
       ? setState({ ...state, [name]: value })
       : setState({ ...state, [name]: checked });
   };
@@ -61,7 +59,7 @@ const CheckBox = (props) => {
     {isRedirectBack && <Redirect to ='/radio_button' />}
 
     <div className={globalClasses.root}>
-      <div>CheckBox question section</div>
+      <header>CheckBox question section</header>
       <FormGroup row>
         <FormControlLabel
           control={
@@ -102,8 +100,8 @@ const CheckBox = (props) => {
             />
             {
               state.checkedOther && <TextField 
-                  name="inputColot"
-                  value={state.inputColot}
+                  name="inputColor"
+                  value={state.inputColor}
                   onChange={handleChange}
                   placeholder='input your optione here ...'
                 />
@@ -116,10 +114,16 @@ const CheckBox = (props) => {
 
       <div className = {globalClasses.navigationButtons}>
         <Button onClick = {exit}>Exit</Button>
-        <Button onClick = {back}>Back</Button>
-        <Button onClick = {next}>Next</Button>
+        <Button onClick = {back} className = {globalClasses.backButton}>Back</Button>
+        <Button 
+          onClick = {next} 
+          className = {globalClasses.nextButton}
+          variant="contained"
+        >
+          Next
+        </Button>
       </div>
     </div>
-  </>;
+  </>
 }
 export default CheckBox;

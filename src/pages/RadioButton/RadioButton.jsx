@@ -1,12 +1,10 @@
 import React from 'react';
-import './styles.js';
+import {useDispatch, useSelector} from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import { useGlobalStyle } from "../globalStyles";
 
-import {useDispatch, useSelector} from "react-redux";
 import {setRadioButtonAnswer_AC, endPoll_AC} from "../../redux/actions";
-
-import { Redirect } from "react-router-dom";
 
 import { 
   Radio,
@@ -17,7 +15,6 @@ import {
   TextField,
   Button
 } from '@material-ui/core';
-
 
 const RadioButton = (props) => {
   const dispatch = useDispatch();
@@ -46,11 +43,12 @@ const RadioButton = (props) => {
     setRedirectHome(true)
   }
 
-  return <div className = {globalClasses.root}>
+  return <>
     {isRedirectHome && <Redirect to ='/' />}
     {isRedirectNext && <Redirect to ='/check_box' />}
     
-    <div className = {globalClasses.header}>RadioButton question section</div>
+    <div className = {globalClasses.root}>
+      <header>RadioButton question section</header>
       <FormControl component="fieldset">
         <FormLabel component="legend">Which number do you like more?</FormLabel>
         <RadioGroup aria-label="numbers" name="number_name" value={value} onChange = {e => setValue(e.target.value)}>
@@ -72,16 +70,19 @@ const RadioButton = (props) => {
         </RadioGroup>
       </FormControl>
     
-    <div>Please, confirm your new answer by clicking on the button "Next" </div>
-    <div>Your new answer --&gt; {value === "other" ? other_answer : value}</div>
-    <div>Your current answer --&gt; {answer?.value}</div>
-
     <div className = {globalClasses.navigationButtons}>
       <Button onClick = {exit}>Exit</Button>
-      <Button className = {globalClasses.nextButton} variant = "contained" onClick = {next}>Next</Button>
+      <Button 
+        className = {globalClasses.nextButton} 
+        variant = "contained" 
+        onClick = {next}
+      >
+        Next
+      </Button>
     </div>
 
-    </div>
+  </div>
+  </>
 };
 
 export default RadioButton;

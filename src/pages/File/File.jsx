@@ -1,15 +1,12 @@
 import React from 'react'
-import './File.css'
+import {useDispatch, useSelector} from "react-redux"
 import { Redirect } from "react-router-dom";
 import {setFile_s_AC, endPoll_AC} from "../../redux/actions"
-import {useDispatch, useSelector} from "react-redux"
-
-import {
-
-  Button
-} from '@material-ui/core';
+import { useGlobalStyle } from "../globalStyles";
+import { Button } from '@material-ui/core';
 
 const File = (props) => {
+  const globalClasses = useGlobalStyle();
   const dispatch = useDispatch(); 
   const [isRedirectHome, setRedirectHome] = React.useState(false);
   const [isRedirectResult, setRedirectResult] = React.useState(false);
@@ -36,7 +33,6 @@ const File = (props) => {
 
   const result = () => {
     dispatch(setFile_s_AC(file223))
-    // console.log(file223)
     setRedirectResult(true)
   }
 
@@ -51,22 +47,24 @@ const File = (props) => {
   }
 
   return <>
-    <div>File question section</div>
     {isRedirectHome && <Redirect to ='/' />}
     {isRedirectResult && <Redirect to ='/result' />}
     {isRedirectBack && <Redirect to ='/user_details' />}
 
-    <input 
-      ref={inputFile} 
-      type='file' 
-      onChange={uploadDeathCertificate}
-    />
+    <div className={globalClasses.root}>
+      <header>File question section</header>
+      <input 
+        ref={inputFile} 
+        type='file' 
+        onChange={uploadDeathCertificate}
+      />
 
-
-
-    <Button onClick = {exit}>Exit</Button>
-    <Button onClick = {back}>Back</Button>
-    <Button onClick = {result}>Submit</Button>
+      <div className = {globalClasses.navigationButtons}>
+        <Button onClick = {exit}>Exit</Button>
+        <Button onClick = {back} className = {globalClasses.backButton}>Back</Button>
+        <Button onClick = {result} variant="contained">Submit</Button>
+      </div>
+    </div>
   </>
 };
 

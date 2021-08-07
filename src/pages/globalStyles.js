@@ -7,14 +7,13 @@ const useGlobalStyle = makeStyles(() => ({
         justifyContent: "center",
         alignItems: "center",
         padding: "30px",
+        "& header": {
+          color: "#9c27b0",
+          fontSize: "18px",
+          marginBottom: "30px"
+      },
     },
-    header: {
-        color: "#9c27b0",
-        fontSize: "18px",
-    },
-    mainButton: {
-      color: "green"
-    },
+
     navigationButtons: {
       display: "flex",
       "& button":{
@@ -25,7 +24,7 @@ const useGlobalStyle = makeStyles(() => ({
       color: "orange"
     },
     backButton: {
-      color: "grey"
+      color: "blue"
     }
   }));
 
